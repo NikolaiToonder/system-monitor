@@ -1,10 +1,9 @@
 [package]
 name = "system-monitor"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
-cxx-qt = "0.6"
-cxx-qt-lib = "0.6"
-qmetaobject = "*"
-cstr = "*"
+qmetaobject = "0.2"
+cstr = "0.2"
+rand = "0.8"

@@ -1,9 +1,23 @@
+mod cpu_module;
+
 use qmetaobject::*;
-use qmetaobject::prelude::*;
+use crate::cpu_module::CpuMonitor;
 
 fn main() {
+    register_types();
+
     let mut view = QQuickView::new();
     view.set_source("qml/main.qml".into());
     view.show();
     view.engine().exec();
+}
+
+
+fn register_types() {
+    qml_register_type::<CpuMonitor>(
+        cstr::cstr!("SystemMonitor"),
+        1,              
+        0,                
+        cstr::cstr!("CpuMonitor")
+    );
 }

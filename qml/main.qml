@@ -1,44 +1,48 @@
 import QtQuick 2.6
+import SystemMonitor 1.0
 
-Item {
+Rectangle {
     width: 400
     height: 300
+    color: "#2b2b2b"
 
-    Rectangle {
-        anchors.fill: parent
-        color: "#2b2b2b"
+    CpuMonitor {
+        id: cpuMonitor
+    }
 
-        Column {
-            anchors.centerIn: parent
-            spacing: 20
+    Column {
+        anchors.centerIn: parent
+        spacing: 20
 
-            Text {
-                text: "Hello from Rust + Qt!"
-                font.pixelSize: 24
-                color: "white"
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
+        Text {
+            text: "CPU Monitor"
+            color: "#00ff00"
+            font.pixelSize: 32
+            font.bold: true
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
 
-            Rectangle {
-                width: 100
-                height: 40
-                color: "#4a4a4a"
-                border.color: "white"
-                anchors.horizontalCenter: parent.horizontalCenter
-                
-                Text {
-                    anchors.centerIn: parent
-                    text: "Click me!"
-                    color: "white"
-                }
+        Text {
+            text: "CPU Usage: " + cpuMonitor.cpu_usage.toFixed(1) + "%"
+            color: "white"
+            font.pixelSize: 24
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        parent.parent.parent.children[0].text = "Button clicked!"
-                    }
-                }
-            }
+        Text {
+            text: "Updates every second"
+            color: "#888888"
+            font.pixelSize: 14
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            cpuMonitor.request_update()
         }
     }
 }
