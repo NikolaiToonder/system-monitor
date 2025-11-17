@@ -1,48 +1,40 @@
 import QtQuick 2.6
 import SystemMonitor 1.0
 
-Rectangle {
-    width: 400
-    height: 300
-    color: "#2b2b2b"
+Item {
+    width: 800
+    height: 600
 
-    CpuMonitor {
-        id: cpuMonitor
-    }
+    property string currentView: "cpu"  // Track which view is active
 
-    Column {
-        anchors.centerIn: parent
-        spacing: 20
+    Row {
+        anchors.fill: parent
 
-        Text {
-            text: "CPU Monitor"
-            color: "#00ff00"
-            font.pixelSize: 32
-            font.bold: true
-            anchors.horizontalCenter: parent.horizontalCenter
+        // Sidebar (separate component)
+        Sidebar {
+            id: sidebar
+            width: 200
+            height: parent.height
+            onViewChanged: function(viewName) {
+                currentView = viewName
+            }
         }
 
-        Text {
-            text: "CPU Usage: " + cpuMonitor.cpu_usage.toFixed(1) + "%"
-            color: "white"
-            font.pixelSize: 24
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+        // Main content area
+        Rectangle {
+            width: parent.width - 200
+            height: parent.height
+            color: "#2b2b2b"
 
-        Text {
-            text: "Updates every second"
-            color: "#888888"
-            font.pixelSize: 14
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-    }
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            cpuMonitor.request_update()
+            // Load different views based on selection
+            Loader {
+                id: contentLoader
+                anchors.fill: parent
+                source: {
+                    if (currentView === "cpu") return "CpuView.qml"
+                    return "CpuView.qml"
+                }
+            }
         }
     }
 }

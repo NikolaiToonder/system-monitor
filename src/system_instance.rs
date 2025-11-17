@@ -27,3 +27,9 @@ pub fn get_cpu_core_usage(core_index: usize) -> Option<f32> {
     
     sys.cpus().get(core_index).map(|cpu| cpu.cpu_usage() as f32)
 }
+
+pub fn get_cpu_core_count() -> usize {
+    let sys = SYSTEM.lock().unwrap();
+    return sys.cpus().len()
+}
+
