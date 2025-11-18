@@ -1,6 +1,7 @@
 import QtQuick 2.6
 import SystemMonitor 1.0
 
+
 Rectangle {
     color: "#2b2b2b"
 
@@ -18,17 +19,18 @@ Rectangle {
             font.pixelSize: 32
             font.bold: true
         }
-
         Text {
             text: "Usage: " + cpuMonitor.cpu_usage.toFixed(1) + "%"
             color: "white"
             font.pixelSize: 24
         }
-
-        Text {
-            text: "Usage: alo"
-            color: "white"
-            font.pixelSize: 24
+        Repeater {
+            model: cpuMonitor.cpu_usage_core
+            Text {
+                text: "Usage: " + cpuMonitor.cpu_usage_core[index].toFixed(1)
+                color: "white"
+                font.pixelSize: 24
+            }
         }
     }
 

@@ -9,7 +9,7 @@ pub static SYSTEM: Lazy<Mutex<System>> = Lazy::new(|| {
 
 pub fn get_global_cpu_usage() -> f32 {
     let mut sys = SYSTEM.lock().unwrap();
-    sys.refresh_all();
+    sys.refresh_cpu_all();
     
     if sys.cpus().is_empty() {
         return 0.0;
@@ -23,7 +23,7 @@ pub fn get_global_cpu_usage() -> f32 {
 // Helper to get individual CPU core usage
 pub fn get_cpu_core_usage(core_index: usize) -> Option<f32> {
     let mut sys = SYSTEM.lock().unwrap();
-    sys.refresh_all();
+    sys.refresh_cpu_all();
     
     sys.cpus().get(core_index).map(|cpu| cpu.cpu_usage() as f32)
 }
