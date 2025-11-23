@@ -20,7 +20,7 @@ Rectangle {
     Rectangle {
         width: 4
         height: parent.height
-        color: "#00ff00"
+        color: "#D1C4A9"
         visible: isSelected
     }
 
@@ -34,7 +34,7 @@ Rectangle {
             width: 24
             height: 24
             radius: 4
-            color: isSelected ? "#00ff00" : "#666666"
+            color: isSelected ? "#D1C4A9" : "#666666"
             anchors.verticalCenter: parent.verticalCenter
         }
 

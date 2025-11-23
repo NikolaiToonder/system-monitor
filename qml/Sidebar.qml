@@ -24,7 +24,7 @@ Rectangle {
 
                 Text {
                     text: "System"
-                    color: "#00ff00"
+                    color: "#D1C4A9"
                     font.pixelSize: 24
                     font.bold: true
                     anchors.horizontalCenter: parent.horizontalCenter
