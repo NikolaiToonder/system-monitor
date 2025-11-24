@@ -20,7 +20,6 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        // Memory usage percentage
         Column {
             spacing: 10
             anchors.horizontalCenter: parent.horizontalCenter
@@ -41,7 +40,6 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
-            // Progress bar
             Rectangle {
                 width: 400
                 height: 30
@@ -64,7 +62,6 @@ Rectangle {
             }
         }
 
-        // Memory details
         Grid {
             columns: 2
             spacing: 20
