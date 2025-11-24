@@ -8,7 +8,7 @@ Rectangle {
 
     property string text: ""
     property bool isSelected: false
-    signal clicked()
+    signal clicked
 
     MouseArea {
         id: mouseArea
@@ -52,11 +52,15 @@ Rectangle {
         color: "white"
         opacity: mouseArea.containsMouse && !isSelected ? 0.05 : 0
         Behavior on opacity {
-            NumberAnimation { duration: 150 }
+            NumberAnimation {
+                duration: 150
+            }
         }
     }
 
     Behavior on color {
-        ColorAnimation { duration: 200 }
+        ColorAnimation {
+            duration: 200
+        }
     }
 }

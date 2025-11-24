@@ -1,9 +1,9 @@
-use qmetaobject::*;
 use crate::system_instance;
+use qmetaobject::*;
 
 #[derive(Default, QObject)]
 
-// Struct directly connected to the cpu module of the qml. 
+// Struct directly connected to the cpu module of the qml.
 pub struct CpuMonitor {
     //Base fields
     base: qt_base_class!(trait QObject),
@@ -16,7 +16,7 @@ pub struct CpuMonitor {
     //Signals
     cpu_usage_changed: qt_signal!(),
     cpu_temp_changed: qt_signal!(),
-    
+
     //Functions
     update_usage: qt_method!(fn(&mut self, new_usage: f32)),
     update_temp: qt_method!(fn(&mut self, new_temp: f32)),
@@ -38,7 +38,7 @@ impl CpuMonitor {
     fn request_update(&mut self) {
         //Collect global core usage
         let global_usage = system_instance::get_global_cpu_usage();
-        
+
         //Collect per-core usage
         let mut per_core_usage = Vec::new();
         for i in 0..system_instance::get_cpu_core_count() {
@@ -50,16 +50,16 @@ impl CpuMonitor {
         // Collect temperature
         let temp = system_instance::get_average_temperature();
         let per_core_temps = system_instance::get_cpu_core_temperatures();
-        
+
         self.update_usage(global_usage);
         self.update_temp(temp);
-        
+
         self.cpu_usage_core = per_core_usage
             .into_iter()
             .map(|val| QVariant::from(val))
             .collect::<QVariantList>()
             .into();
-        
+
         self.cpu_temp_core = per_core_temps
             .into_iter()
             .map(|val| QVariant::from(val))

@@ -1,7 +1,6 @@
 import QtQuick 2.6
 import SystemMonitor 1.0
 
-
 Rectangle {
     color: "#2b2b2b"
 
@@ -30,7 +29,7 @@ Rectangle {
                     height: 40
                     color: displayMode === "usage" ? "#D1C4A9" : "#3d3d3d"
                     radius: 8
-                    
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: displayMode = "usage"
@@ -46,7 +45,9 @@ Rectangle {
                     }
 
                     Behavior on color {
-                        ColorAnimation { duration: 200 }
+                        ColorAnimation {
+                            duration: 200
+                        }
                     }
                 }
 
@@ -55,7 +56,7 @@ Rectangle {
                     height: 40
                     color: displayMode === "temperature" ? "#D1C4A9" : "#3d3d3d"
                     radius: 8
-                    
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: displayMode = "temperature"
@@ -71,7 +72,9 @@ Rectangle {
                     }
 
                     Behavior on color {
-                        ColorAnimation { duration: 200 }
+                        ColorAnimation {
+                            duration: 200
+                        }
                     }
                 }
             }
@@ -95,9 +98,7 @@ Rectangle {
                 }
 
                 Text {
-                    text: displayMode === "usage" 
-                        ? "Average Usage: " + cpuMonitor.cpu_usage.toFixed(1) + "%"
-                        : "Average Temperature: " + cpuMonitor.cpu_temp.toFixed(1) + "°C"
+                    text: displayMode === "usage" ? "Average Usage: " + cpuMonitor.cpu_usage.toFixed(1) + "%" : "Average Temperature: " + cpuMonitor.cpu_temp.toFixed(1) + "°C"
                     color: "white"
                     font.pixelSize: 24
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -110,9 +111,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     Repeater {
-                        model: displayMode === "usage" 
-                            ? cpuMonitor.cpu_usage_core 
-                            : cpuMonitor.cpu_temp_core
+                        model: displayMode === "usage" ? cpuMonitor.cpu_usage_core : cpuMonitor.cpu_temp_core
 
                         Rectangle {
                             width: 80
@@ -134,13 +133,9 @@ Rectangle {
                                 anchors.centerIn: parent
                                 text: {
                                     if (displayMode === "usage") {
-                                        return parent.hovered 
-                                            ? "Core " + index + ":\n" + modelData.toFixed(1) + "%"
-                                            : modelData.toFixed(1) + "%"
+                                        return parent.hovered ? "Core " + index + ":\n" + modelData.toFixed(1) + "%" : modelData.toFixed(1) + "%";
                                     } else {
-                                        return parent.hovered 
-                                            ? "Core " + index + ":\n" + modelData.toFixed(1) + "°C"
-                                            : modelData.toFixed(1) + "°C"
+                                        return parent.hovered ? "Core " + index + ":\n" + modelData.toFixed(1) + "°C" : modelData.toFixed(1) + "°C";
                                     }
                                 }
                                 color: "white"
@@ -156,7 +151,9 @@ Rectangle {
                                 opacity: parent.hovered ? 0.1 : 0
                                 radius: parent.radius
                                 Behavior on opacity {
-                                    NumberAnimation { duration: 150 }
+                                    NumberAnimation {
+                                        duration: 150
+                                    }
                                 }
                             }
                         }
@@ -171,7 +168,7 @@ Rectangle {
         running: true
         repeat: true
         onTriggered: {
-            cpuMonitor.request_update()
+            cpuMonitor.request_update();
         }
     }
 }

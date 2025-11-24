@@ -49,8 +49,8 @@ Rectangle {
             text: "CPU"
             isSelected: sidebar.selectedView === "cpu"
             onClicked: {
-                sidebar.selectedView = "cpu"
-                sidebar.viewChanged("cpu")
+                sidebar.selectedView = "cpu";
+                sidebar.viewChanged("cpu");
             }
         }
 
@@ -58,8 +58,8 @@ Rectangle {
             text: "Memory"
             isSelected: sidebar.selectedView === "memory"
             onClicked: {
-                sidebar.selectedView = "memory"
-                sidebar.viewChanged("memory")
+                sidebar.selectedView = "memory";
+                sidebar.viewChanged("memory");
             }
         }
 
@@ -67,8 +67,8 @@ Rectangle {
             text: "GPU"
             isSelected: sidebar.selectedView === "gpu"
             onClicked: {
-                sidebar.selectedView = "gpu"
-                sidebar.viewChanged("gpu")
+                sidebar.selectedView = "gpu";
+                sidebar.viewChanged("gpu");
             }
         }
 
@@ -76,8 +76,8 @@ Rectangle {
             text: "Storage"
             isSelected: sidebar.selectedView === "storage"
             onClicked: {
-                sidebar.selectedView = "storage"
-                sidebar.viewChanged("storage")
+                sidebar.selectedView = "storage";
+                sidebar.viewChanged("storage");
             }
         }
 
@@ -85,8 +85,8 @@ Rectangle {
             text: "Network"
             isSelected: sidebar.selectedView === "network"
             onClicked: {
-                sidebar.selectedView = "network"
-                sidebar.viewChanged("network")
+                sidebar.selectedView = "network";
+                sidebar.viewChanged("network");
             }
         }
 

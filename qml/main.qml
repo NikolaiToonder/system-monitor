@@ -7,6 +7,17 @@ Item {
 
     property string currentView: "cpu"  // Track which view is active
 
+    // View mapping - add new views here
+    property var viewMap: ({
+            "cpu": "CpuView.qml",
+            "memory": "MemoryView.qml",
+            "gpu": "CpuView.qml"  // Placeholder, will be replaced later
+            ,
+            "storage": "CpuView.qml"  // Placeholder
+            ,
+            "network": "CpuView.qml"  // Placeholder
+        })
+
     Row {
         anchors.fill: parent
 
@@ -15,8 +26,8 @@ Item {
             id: sidebar
             width: 200
             height: parent.height
-            onViewChanged: function(viewName) {
-                currentView = viewName
+            onViewChanged: function (viewName) {
+                currentView = viewName;
             }
         }
 
@@ -30,10 +41,7 @@ Item {
             Loader {
                 id: contentLoader
                 anchors.fill: parent
-                source: {
-                    if (currentView === "cpu") return "CpuView.qml"
-                    return "CpuView.qml"
-                }
+                source: viewMap[currentView] || "CpuView.qml"
             }
         }
     }
